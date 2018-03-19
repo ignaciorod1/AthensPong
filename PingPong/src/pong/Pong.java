@@ -241,10 +241,10 @@ public class Pong implements ActionListener, KeyListener
 		renderer.repaint();
 	}
 
-	public static void main(String[] args)
-	{
-		pong = new Pong();
-	}
+//	public static void main(String[] args)
+//	{
+//		pong = new Pong();
+//	}
 
 	@Override
 	public void keyPressed(KeyEvent e)
