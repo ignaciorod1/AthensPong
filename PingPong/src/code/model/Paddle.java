@@ -20,7 +20,7 @@ public class Paddle implements IMovementAction{
 	}
 	
 	@Override
-	public void move() {
+	public void move() {	//common method with the ball
 		// TODO Auto-generated method stub
 		
 	}
