@@ -1,10 +1,8 @@
 package code.controller;
 
-import code.pong.Ball;
-import code.pong.Paddle;
-import code.view.PingPongPanel;
+import code.PingPongMainFrame;
 
-public class Manager {
+public class Manager /*implements ActionListener, KeyListener*/{
 
 	/*
 	 * Top hareket etmeli, her hareket ettiðinde repaint.
@@ -18,9 +16,13 @@ public class Manager {
 	
 	private static Manager INSTANCE;
 	
+	private static PingPongMainFrame mainFrame;
 	private PaddleManager paddleManager;
 	
 	private Manager() {
+		mainFrame = PingPongMainFrame.getInstance();
+//		mainFrame.getPingPongPanel().addKeyListener(this);
+//		mainFrame.addKeyListener(this);
 		paddleManager = new PaddleManager();
 	}
 	

@@ -26,6 +26,7 @@ public class Paddle implements IMovementAction{
 	}
 	
 	public void moveUp() {
+		System.out.println("moveUp");
 		if (yPos - Constant.PADDLE_SPEED > 0){
 			yPos -= Constant.PADDLE_SPEED;
 		}
