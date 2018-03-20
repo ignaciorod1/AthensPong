@@ -29,6 +29,7 @@ public class PingPongPanel extends APingPongPanel implements ActionListener, Key
 		graphics.setColor(Color.PINK);
 		Manager.getInstance().getPaddleManager().getPlayerOne().draw(graphics);
 		Manager.getInstance().getPaddleManager().getPlayerTwo().draw(graphics);
+		Manager.getInstance().getBallManager().getBall().draw(graphics);
 	}
 	
 	public void notifyDataChange() {

@@ -1,7 +1,5 @@
 package code.controller;
 
-import code.PingPongMainFrame;
-
 public class Manager /*implements ActionListener, KeyListener*/{
 
 	/*
@@ -16,14 +14,12 @@ public class Manager /*implements ActionListener, KeyListener*/{
 	
 	private static Manager INSTANCE;
 	
-	private static PingPongMainFrame mainFrame;
 	private PaddleManager paddleManager;
+	private BallManager ballManager;
 	
 	private Manager() {
-		mainFrame = PingPongMainFrame.getInstance();
-//		mainFrame.getPingPongPanel().addKeyListener(this);
-//		mainFrame.addKeyListener(this);
 		paddleManager = new PaddleManager();
+		ballManager = new BallManager();
 	}
 	
 	public static Manager getInstance() {
@@ -33,13 +29,17 @@ public class Manager /*implements ActionListener, KeyListener*/{
 		return INSTANCE;
 	}
 	
-	
-	
 	public PaddleManager getPaddleManager() {
 		return paddleManager;
 	}
+	
+	
+	public BallManager getBallManager() {
+		return ballManager;
+	}
 
 	public void launch() {
+		ballManager.getBall().run();
 //		paddleManager.drawInitialPaddles();
 //		drawBall();
 	}

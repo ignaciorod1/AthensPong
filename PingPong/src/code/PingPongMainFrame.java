@@ -30,7 +30,8 @@ public class PingPongMainFrame extends JFrame {
         this.setTitle("Ping Pong");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(getInnerContainer());
-        this.setSize(new Dimension(Constant.WINDOW_WIDTH+20, Constant.WINDOW_HEIGHT+20));
+        this.setSize(new Dimension(Constant.WINDOW_WIDTH, Constant.WINDOW_HEIGHT+50));
+        this.setResizable(false);
 //      this.pack();
 	}
 	
@@ -45,7 +46,7 @@ public class PingPongMainFrame extends JFrame {
 		if(container == null) {
 			container = new JPanel();
 			container.setLayout(new GridBagLayout());
-			container.add(getPingPongPanel(), new GridBagConstraints(0, 0, 3, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+			container.add(getPingPongPanel(), new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 			container.add(getLaunchBtn(), new GridBagConstraints(0, 1, 1, 1, 0, 0, GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		}
 		return container;
