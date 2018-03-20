@@ -5,9 +5,9 @@ import java.awt.Graphics2D;
 public class Ball implements IMovementAction{
 	private int xPos, yPos;
 	
-	public void Ball(int x, int y){
-	xPos = x;
-	yPos = y;
+	public Ball(int x, int y){
+		this.xPos = x;
+		this.yPos = y;
 	}
 
 	@Override
@@ -18,8 +18,6 @@ public class Ball implements IMovementAction{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		
 	}
-
 
 }

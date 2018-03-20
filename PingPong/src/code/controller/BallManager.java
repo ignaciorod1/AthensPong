@@ -1,5 +1,4 @@
 package code.controller;
-package model;
 
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -9,16 +8,17 @@ import java.awt.event.KeyListener;
 
 import code.PingPongMainFrame;
 import code.model.Constant;
+import code.model.Paddle;
 import code.model.Ball;
 
 
-public class BallManager implements ActionListener, KeyListener{
+public class BallManager{
 
     private Graphics2D graphics;
     private Ball ball;
 
     public BallManager(){
-        ball = new Ball(200,200)
+        ball = new Ball(Constant.BALL_WIDTH,Constant.BALL_HEIGHT);
     }
     
     public int checkCollision(Paddle paddle)

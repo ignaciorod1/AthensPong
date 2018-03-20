@@ -38,20 +38,33 @@ public class PingPongPanel extends APingPongPanel implements ActionListener, Key
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		int id = e.getKeyCode();
-		System.out.println("asdasdsadsa");
-		if (id == KeyEvent.VK_W){
-			System.out.println("ActionEvent");
+		int keyCode = e.getKeyCode();
+		switch (keyCode) {
+		case KeyEvent.VK_W:
 			Manager.getInstance().getPaddleManager().getPlayerOne().moveUp();
-//			playerOne.draw(graphics);
-			notifyDataChange();
+			break;
+			
+		case KeyEvent.VK_S:
+			Manager.getInstance().getPaddleManager().getPlayerOne().moveDown();	
+			break;
+			
+		case KeyEvent.VK_UP:
+			Manager.getInstance().getPaddleManager().getPlayerTwo().moveUp();
+			break;
+			
+		case KeyEvent.VK_DOWN:
+			Manager.getInstance().getPaddleManager().getPlayerTwo().moveDown();
+			break;
+		default:
+			break;
 		}
+		notifyDataChange();
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("asdsd");
+		System.out.println("keyReleased");
 	}
 
 	@Override
