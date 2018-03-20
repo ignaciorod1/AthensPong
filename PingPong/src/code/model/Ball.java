@@ -4,6 +4,11 @@ import java.awt.Graphics2D;
 
 public class Ball implements IMovementAction{
 	private int xPos, yPos;
+	
+	public void Ball(int x, int y){
+	xPos = x;
+	yPos = y;
+	}
 
 	@Override
 	public void draw(Graphics2D graphics) {
