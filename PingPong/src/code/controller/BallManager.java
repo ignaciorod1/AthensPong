@@ -18,7 +18,7 @@ public class BallManager implements ActionListener, KeyListener{
     private Ball ball;
 
     public BallManager(){
-        ball = new Ball()
+        ball = new Ball(200,200)
     }
     
     public int checkCollision(Paddle paddle)
