@@ -1,9 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
-import java.util.HashMap;
-import java.util.HashSet;
+//import java.awt.geom.Rectangle2D;
+//import java.util.HashMap;
+//import java.util.HashSet;
 
 import javax.swing.*;
 
@@ -19,7 +19,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 	private int height=671, width=294;//constants
 	// pad
 	
-	private HashSet<String> keys = new HashSet<String>();
+	//private HashSet<String> keys = new HashSet<String>();
 	
 	private int padH = 10, padW = 40;
 	private int inset = 10;
@@ -28,14 +28,12 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 	boolean flag_BL=false;
 	boolean flag_TR=false;
 	boolean flag_BR=false;
-	// ball
-	// score
 	
 	double ballX = Tball.getBallX();
 	double ballY = Tball.getBallY();
 	double velocityX = Tball.getVelX();
 	double velocityY = Tball.getVelY();
-	Paddle bottomPad = new Paddle(width/2 - 20, height - padH - inset,1); //¿constantes: 20???? height
+	Paddle bottomPad = new Paddle(width/2 - 20, height - padH - inset,1); //Â¿constantes: 20???? height
 	Paddle topPad= new Paddle(width/2 -20, inset,2);
 	
 	
