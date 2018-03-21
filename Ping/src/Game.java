@@ -10,29 +10,37 @@ import javax.swing.*;
 
 public class Game extends JPanel implements KeyListener, ActionListener {
 	
-	private int height, width;
+//	private int height, width;
+	private static final long serialVersionUID = 1L;
 	private Timer t = new Timer(5, this);
 	private boolean first;
-	private Ball Tball;
+	private Ball Tball = Ball.getInstance();
+	
+	private int height=671, width=294;//constants
+	// pad
 	
 	private HashSet<String> keys = new HashSet<String>();
 	
-	// pad
-	private final int SPEED = 1;
 	private int padH = 10, padW = 40;
-	private int P2_PadX, P1_PadX;
 	private int inset = 10;
-	private double ballX, ballY;
-	
+	// Paddle motion flags
+	boolean flag_TL=false;
+	boolean flag_BL=false;
+	boolean flag_TR=false;
+	boolean flag_BR=false;
 	// ball
-	
-    // private double ballX, ballY, velX = 1, velY = 1, ballSize = 20;
-	
 	// score
-	private int scoreTop, scoreBottom;
+	
+	double ballX = Tball.getBallX();
+	double ballY = Tball.getBallY();
+	double velocityX = Tball.getVelX();
+	double velocityY = Tball.getVelY();
+	Paddle bottomPad = new Paddle(width/2 - 20, height - padH - inset,1); //¿constantes: 20???? height
+	Paddle topPad= new Paddle(width/2 -20, inset,2);
+	
 	
 	public Game() {
-		Tball = new Ball();
+		
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -45,90 +53,77 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		height = getHeight();
-		width = getWidth();
+	//	height = getHeight();
+//		width = getWidth();
 
 		// initial positioning
 		if (first) {
-			
-			P2_PadX = width / 2 - padW / 2;
-			P1_PadX = P2_PadX;
-			ballX = Tball.getBallX();
-			ballY = Tball.getBallY();
-//			ballX = width / 2 - Tball.getBallSize() / 2;
-//			ballY = height / 2 - Tball.getBallSize() / 2;
+			//P2_PadX = width / 2 - padW / 2;
+		//	P1_PadX = P2_PadX;
 			first = false;
 		}
 		
-		// bottom pad
-		Rectangle2D bottomPad = new Rectangle(P2_PadX, height - padH - inset, padW, padH);
-		g2d.fill(bottomPad);
+		// paddle
+		bottomPad.update(g2d);
+		topPad.update(g2d);
 		
-		// top pad
-		Rectangle2D topPad = new Rectangle(P1_PadX, inset, padW, padH);
-		g2d.fill(topPad);
 		
 		// ball
 		Ellipse2D ball = new Ellipse2D.Double(ballX, ballY, Tball.getBallSize(), Tball.getBallSize());
 		g2d.fill(ball);
 		
 		// scores
-		String scoreB = "Bottom: " + new Integer(scoreBottom).toString();
-		String scoreT = "Top: " + new Integer(scoreTop).toString();
+		String scoreB = "Bottom: " + new Integer(bottomPad.score).toString();
+		String scoreT = "Top: " + new Integer(topPad.score).toString();
 		g2d.drawString(scoreB, 10, height / 2);
 		g2d.drawString(scoreT, width - 50, height / 2);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 double velX = Tball.getVelX();
-		 double velY = Tball.getVelY();
+		
 		// side walls
 		if (ballX < 0 || ballX > width - Tball.getBallSize()) {
 			
-			velX = -velX;
+			velocityX = -velocityX;
 		}
 		// top / down walls
 		if (ballY < 0) {
-			velY = -velY;
-			++ scoreBottom;
+			velocityY = -velocityY;
+			bottomPad.score++;
 		}
 		
 		if (ballY + Tball.getBallSize() > height) {
-			velY = -velY;
-			++ scoreTop;
+			velocityY = -velocityY;
+			topPad.score++;
 		}
 		// bottom pad
-	    if (ballY + Tball.getBallSize() >= height - padH - inset && velY > 0)
-			if (ballX + Tball.getBallSize() >= P2_PadX && ballX <= P2_PadX + padW)
-				velY = -velY;
+	    if (ballY + Tball.getBallSize() >= height - padH - inset && velocityY > 0)
+			if (ballX + Tball.getBallSize() >= bottomPad.pos.x && ballX <= bottomPad.pos.x + padW)
+				velocityY = -velocityY;
 
 		// top pad
-		if (ballY == inset + padH && velY < 0)
-			if (ballX + Tball.getBallSize() >= P1_PadX && ballX <= P1_PadX + padW)
-				velY = -velY;
+		if (ballY == inset + padH && velocityY < 0)
+			if (ballX + Tball.getBallSize() >= topPad.pos.x && ballX <= topPad.pos.x + padW)
+				velocityY = -velocityY;
 
-		ballX += velX;
-	   	ballY += velY;
+		ballX += velocityX;
+	   	ballY += velocityY;
 		
-		// pressed keys
-		if (keys.size() == 1) {
-			if (keys.contains("LEFT")) {
-				P2_PadX -= (P2_PadX > 0) ? SPEED : 0;
-			}
-			else if (keys.contains("RIGHT")) {
-				P2_PadX += (P2_PadX < width - padW) ? SPEED : 0;
-			}
-			else if (keys.contains("Z")) {
-				P1_PadX -= (P1_PadX > 0) ? SPEED : 0;
-			}
-			else if (keys.contains("X")) {
-				P1_PadX += (P1_PadX < width - padW) ? SPEED : 0;
-			}
-		}
+		// pads
+	   	if(flag_BL)
+			bottomPad.move(0);
+		if(flag_TL)
+			topPad.move(0);
+		if(flag_BR)
+			bottomPad.move(1);
+		if(flag_TR)
+			topPad.move(1);
 		
 		repaint();
-	}
+	}	
+		
+		
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
@@ -138,16 +133,16 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		int code = e.getKeyCode();
 		switch (code) {
 		case KeyEvent.VK_LEFT:
-			keys.add("LEFT");
+			flag_BL=true;
 			break;
 		case KeyEvent.VK_RIGHT:
-			keys.add("RIGHT");
+			flag_BR=true;
 			break;
 		case KeyEvent.VK_Z:
-			keys.add("Z");
+			flag_TL=true;
 			break;
 		case KeyEvent.VK_X:
-			keys.add("X");
+			flag_TR=true;
 			break;
 		}
 	}
@@ -157,17 +152,19 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		int code = e.getKeyCode();
 		switch (code) {
 		case KeyEvent.VK_LEFT:
-			keys.remove("LEFT");
+			flag_BL=false;
 			break;
 		case KeyEvent.VK_RIGHT:
-			keys.remove("RIGHT");
+			flag_BR=false;
 			break;
 		case KeyEvent.VK_Z:
-			keys.remove("Z");
+			flag_TL=false;
 			break;
 		case KeyEvent.VK_X:
-			keys.remove("X");
+			flag_TR=false;
 			break;
 		}
+
 	}
 }
+
