@@ -3,13 +3,13 @@ import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 public class Paddle {
-	public vector2d pos = new vector2d(0, 0);
+	private vector2d pos = new vector2d(0, 0);
 	private int width;
 	private int height;
-	public int score;
+	private int score;
 	private int speed;
 	
-	public Paddle (int X, int Y,int paddlenumber) {
+	public Paddle (int X, int Y) {
 		this.score = 0;
 		this.pos.x = X;
 		this.pos.y = Y;
@@ -32,4 +32,25 @@ public class Paddle {
 					this.pos.x += (this.pos.x < 294 - this.width) ? this.speed : 0;
 	}
 	
+
+public void setscore(int score) {
+	this.score = score;
+}
+
+public void setX (int X) {
+	this.pos.x  = X;
+}
+public void setY(int Y) {
+	this.pos.y  = Y;
+}
+
+public int getscore() {
+	return this.score;
+}
+public int getPadX() {
+	return this.pos.x;
+}
+public int getPadY() {
+	return this.pos.y;
+}
 }
