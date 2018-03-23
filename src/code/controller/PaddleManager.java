@@ -9,11 +9,7 @@ import code.model.strategyPattern.MoveUp;
 public class PaddleManager {
 
 	private Paddle playerOne;
-	private Paddle playerTwo;
-	
-//	private IElement playerOne;
-//	private IElement playerTwo;
-	
+	private Paddle playerTwo;	
 	
 	public PaddleManager() {
 		playerOne = new Paddle("PlayerOne", 0, Constant.WINDOW_HEIGHT/2-Constant.PADDLE_HEIGHT/2);
@@ -30,13 +26,5 @@ public class PaddleManager {
 	public Paddle getPlayerTwo() {
 		return playerTwo;
 	}
-	
-//	public IElement getPlayerOne() {
-//		return playerOne;
-//	}
-//
-//	public IElement getPlayerTwo() {
-//		return playerTwo;
-//	}
 	
 }

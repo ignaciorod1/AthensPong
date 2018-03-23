@@ -32,6 +32,7 @@ public class PingPongPanel extends APingPongPanel implements KeyListener, Action
 		timer.start();
 	}
 	
+	
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
@@ -40,6 +41,11 @@ public class PingPongPanel extends APingPongPanel implements KeyListener, Action
 		Manager.getInstance().getPaddleManager().getPlayerOne().draw(graphics);
 		Manager.getInstance().getPaddleManager().getPlayerTwo().draw(graphics);
 		Manager.getInstance().getBallManager().getBall().draw(graphics);
+		
+		String score1 = "Player 1: " + new Integer(Manager.getInstance().getPaddleManager().getPlayerTwo().getScore()).toString();
+		String score2 = "Player 2: " + new Integer(Manager.getInstance().getPaddleManager().getPlayerOne().getScore()).toString();
+		g.drawString(score1, 10, getHeight()-50);
+		g.drawString(score2, getWidth() - 75, getHeight()-50);
 	}
 	
 	public void notifyDataChange() {
@@ -52,19 +58,19 @@ public class PingPongPanel extends APingPongPanel implements KeyListener, Action
 		int keyCode = e.getKeyCode();
 		switch (keyCode) {
 		case KeyEvent.VK_W:
-			flag_2U=true;
-			break;
-			
-		case KeyEvent.VK_S:
-			flag_2D=true;	
-			break;
-			
-		case KeyEvent.VK_UP:
 			flag_1U=true;
 			break;
 			
-		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_S:
 			flag_1D=true;	
+			break;
+			
+		case KeyEvent.VK_UP:
+			flag_2U=true;
+			break;
+			
+		case KeyEvent.VK_DOWN:
+			flag_2D=true;	
 			break;
 		default:
 			break;
@@ -78,19 +84,19 @@ public class PingPongPanel extends APingPongPanel implements KeyListener, Action
 		int keyCode = e.getKeyCode();
 		switch (keyCode) {
 		case KeyEvent.VK_W:
-			flag_2U=false;
-			break;
-			
-		case KeyEvent.VK_S:
-			flag_2D=false;	
-			break;
-			
-		case KeyEvent.VK_UP:
 			flag_1U=false;
 			break;
 			
-		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_S:
 			flag_1D=false;	
+			break;
+			
+		case KeyEvent.VK_UP:
+			flag_2U=false;
+			break;
+			
+		case KeyEvent.VK_DOWN:
+			flag_2D=false;	
 			break;
 		default:
 			break;

@@ -28,10 +28,6 @@ public class BallManager{
     	return ball;
     }
     
-//    public IElement getBall() {
-//    	return ball;
-//    }
-    
     private int xPos;
     private int yPos;
     
