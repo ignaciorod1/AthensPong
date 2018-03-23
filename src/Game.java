@@ -39,8 +39,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		// height = getHeight();
-		// width = getWidth();
+		
 
 		// initial positioning
 		if (first) {
