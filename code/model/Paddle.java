@@ -54,5 +54,9 @@ public class Paddle implements IElement{
     public void increaseScore() {
     	score = score +1 ;
     }
+    
+    public int getScore() {
+    	return score;
+    }
 	
 }
